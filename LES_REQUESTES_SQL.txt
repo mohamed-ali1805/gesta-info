@@ -1,0 +1,95 @@
+# 1. Nombre d'articles en rupture de stock
+sql1 = "SELECT COUNT(reference) AS nbr FROM article WHERE quantite < stock_sec AND stock_sec > 0"
+
+# 2. Moyenne de marge sur les articles
+sql2 = "SELECT COALESCE(AVG(marge), 0) AS marge FROM article"
+
+# 3. Nombre de promotions actives
+sql3 = "SELECT COUNT(article) AS nbr FROM PROMOTIONS WHERE active > 0"
+
+# 4. Informations sur le stock des produits
+sql4 = "SELECT COUNT(A.Reference) AS NBR, COALESCE(SUM(COALESCE(S.qtephy, 0) * COALESCE(A.prix_achat, 0)), 0) AS stockinit, COALESCE(SUM(COALESCE(S.qte, 0) * COALESCE(A.prix_achat, 0)), 0) AS Totalstock FROM article A, stockglobale S WHERE S.reference = A.reference AND A.reference <> 0"
+
+# 5. Nombre de produits en cuisson
+sql5 = "SELECT COUNT(A.Reference) AS NBR FROM article A, stockglobale S WHERE S.reference = A.reference AND A.reference <> 0 AND cuisson = 1"
+
+# 6. Nombre de produits d'origine
+sql6 = "SELECT COUNT(A.Reference) AS NBR FROM article A, stockglobale S WHERE S.reference = A.reference AND A.reference <> 0 AND porigine = 1"
+
+# 7. Montant total des produits en stock négatif
+sql7 = "SELECT COALESCE(SUM(COALESCE(S.qte, 0) * COALESCE(A.prix_achat, 0)), 0) AS totalstock FROM article A, stockglobale S WHERE S.reference = A.reference AND A.reference <> 0 AND S.qte < 0"
+
+# 8. Nombre total de clients
+sql8 = "SELECT COUNT(code) AS NBR FROM Clients WHERE CODE > 0"
+
+# 9. Nombre de clients fidèles
+sql9 = "SELECT COUNT(code) AS NBR FROM Clients WHERE fidelite = 1"
+
+# 10. Solde total des clients
+sql10 = "SELECT COALESCE(SUM(Credit), 0) AS Tcredit, COALESCE(SUM(Debit), 0) AS Tdebit, (COALESCE(SUM(Credit), 0) + COALESCE(SUM(Debit), 0)) AS SOLD FROM GL WHERE client > 0"
+
+# 11. Nombre total de fournisseurs
+sql11 = "SELECT COUNT(code) AS NBR FROM F_FOURNISSEURS WHERE code > 1"
+
+# 12. Solde total des fournisseurs
+sql12 = "SELECT COALESCE(SUM(Credit), 0) AS Tcredit, COALESCE(SUM(Debit), 0) AS Tdebit, (COALESCE(SUM(Credit), 0) + COALESCE(SUM(Debit), 0)) AS SOLD FROM GLFOURNISSEUR WHERE fournisseur > 1"
+
+# 13. Valeur totale de la fidélité
+sql13 = "SELECT COALESCE(SUM(F.valeur_plus), 0) AS valeur FROM valeur_fidelite_archive F"
+
+# 14. Nombre de variations de ventes de produits aujourd'hui
+sql14 = "SELECT COUNT(cible) AS nombre FROM VARIATION_VENTE_PRODUITS WHERE DATE_VARIATION = current_date"
+
+# 15. Nombre d'achats aujourd'hui
+sql15 = "SELECT COUNT(article) AS nombre FROM achats WHERE DATE_mouvement = current_date"
+
+# 16. Nombre de chèques fidélité émis aujourd'hui
+sql16 = "SELECT COUNT(CHEQUE) AS nombre FROM CHEQUEFID WHERE DATECHEQUE = current_date"
+
+# 17. Nombre de chèques consommés aujourd'hui
+sql17 = "SELECT COUNT(N_CHEQUE) AS nombre FROM PAIEMENT_CHEQUE WHERE DATEVENTE = current_date"
+
+# 18. Nombre de promotions actives aujourd'hui
+sql18 = "SELECT COUNT(ARTICLE) AS nombre FROM LISTES_PROMOTIONS WHERE DATE_DEBUT = current_date"
+
+# 19. Total des chèques encaissés aujourd'hui
+sql19 = "SELECT COALESCE(SUM(MONTANT), 0) AS TCHEQUE, COUNT(NUMPAYEMENT) AS NBCHEQUE FROM PAYEMENT WHERE REFPIECE > 0 AND MODEREG = 2 AND datepayement = current_date"
+
+# 20. Total des bons de réduction émis
+sql20 = "SELECT COUNT(rang) AS nbr, SUM(COALESCE(montant, 0) - COALESCE(REMISE, 0)) AS total FROM MOUVEMENT WHERE TYPE_MOUVE = 0"
+
+# 21. Total des pertes en produits
+sql21 = "SELECT COUNT(article) AS nbr, SUM(MONTANT) AS total FROM TOUTES_LIGNES_DEMARQUE"
+
+# 22. Total des retours aux fournisseurs
+sql22 = "SELECT COUNT(article) AS nbr, SUM(TOTALTTC) AS total FROM ETAT_RETOUR_FOURNISSEURS"
+
+# 23. Entrées en stock aujourd'hui
+sql23 = "SELECT COALESCE(achats, 0) AS ACHATS, COALESCE(pertes, 0) AS PERTES FROM valeur_stock WHERE date_valeur = current_date"
+
+# 24. Total des sorties de stock aujourd'hui
+sql24 = "SELECT COUNT(n_facture) AS nbr, SUM(montant_w) AS total FROM t_livraison_p WHERE date_livraison = current_date"
+
+# 25. Total des ventes en caisse aujourd'hui
+sql25 = "SELECT COUNT(n_facture) AS nbr, SUM(montant_w) AS total FROM t_comptoir_p WHERE JOURNEE = current_date"
+
+# 26. Nouveaux produits créés aujourd'hui
+sql26 = "SELECT COUNT(reference) AS nbr FROM article WHERE date_creation = current_date"
+
+# 27. Total des nouveaux versements aux fournisseurs aujourd'hui
+sql27 = "SELECT COALESCE(SUM(montant), 0) AS total FROM glfournisseur g WHERE g.date_transaction = current_date AND g.typesource = 2"
+
+# 28. Total des nouveaux chèques fidélité émis aujourd'hui
+sql28 = "SELECT COALESCE(SUM(valeur), 0) AS total FROM CHEQUEFID g WHERE g.datecheque = current_date"
+
+# 29. Total de la nouvelle fidélité accumulée aujourd'hui
+sql29 = "SELECT COALESCE(SUM(valeur_plus), 0) AS valeur FROM VALEUR_FIDELITE_JOURNEE F"
+
+# 30. Total des nouveaux chèques consommés aujourd'hui
+sql30 = "SELECT COALESCE(SUM(MONTANT), 0) AS valeur, COUNT(NUMPAYEMENT) AS NBCHEQUE FROM PAYEMENT WHERE REFPIECE > 0 AND MODEREG = 2 AND datepayement = current_date"
+
+# 31. Précédent chiffre d'affaires et variation des ventes
+sql31 = "SELECT PRECTVENTE AS valeur, VARIATION FROM comparatif_produit_ca WHERE j = current_date"
+
+# 32. Dépense en chèques fidélité et valeurs de points de vente et d'achat
+sql32 = "SELECT DEPENSE, VENTE_POINT, ACHAT_POINT, TYPE_REMISE FROM IBQPARAMS"

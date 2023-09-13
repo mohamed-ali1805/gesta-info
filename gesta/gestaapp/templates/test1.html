@@ -1,0 +1,78 @@
+
+<body style="background-color: rgb(26, 26, 80);color: aliceblue;">
+    
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <h1>nombre de vente en cours de {{user}}</h1>
+    <div id="cc" style="width: 60%; padding: 5px;border-radius: 5px;">
+        <canvas id="barChart"></canvas>
+    </div>
+   
+
+    <script>
+        // Récupérer les données JSON depuis Django et les convertir en tableaux JavaScript
+        var data_labels = JSON.parse('{{ data_labels_json|safe }}');
+        var data_values = JSON.parse('{{ data_values_json|safe }}');
+
+        // Créer le graphique à barres
+        var ctx = document.getElementById('barChart').getContext('2d');
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data_labels,
+                datasets: [{
+                    label: 'Chiffre d\'affaires',
+                    data: data_values,
+                    backgroundColor: ['rgba(75, 192, 192, 0.2)','rgba(200, 3, 192, 0.2)'],
+                    borderColor: ['rgba(75, 192, 192, 1)','rgba(200, 3, 192, 1)'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Mois' // Titre de l'axe des x
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Chiffre d\'affaires' // Titre de l'axe des y
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+   
+
+    <h1 style="color:red">fournisseurs :</h1>
+        <h4>total={{total_fournisseur}}</h4>
+        <h4>solde={{soldes_fournisseur}}</h4>
+        <h4>total des entree={{entrees_fournisseur}}</h4>
+        <h4>somme total des entree={{entrees_fournisseur_somme}}</h4>
+    <h1 style="color:red">produit</h1>
+        <h4>nombre de produit={{nombre_produit}}</h4>
+        <h4>stock initial={{stock_initial}}</h4>
+        <h4>stock total={{stock_total}}</h4>
+        <h4>stock negatif={{produit_stock_negatif}}</h4>
+        <h4>marge moyenne={{marge_moy}}</h4>
+        <h4>dont fidilisee={{dont_fidelisee}}</h4>
+        <h4>dont actif={{dont_actif}}</h4>
+        <h4>retour des fournisseur={{retour_fournisseur}}</h4>
+    <h1 style="color:red">client</h1>
+        <h4>total des client={{total_client}}</h4>
+        <h4>total des clients fideles={{total_client_fideles}}</h4>
+        <h4>total des soldes des clients={{solde_client}}</h4>
+        <h4>valeur de fidelite={{valeur_fidelite}}</h4>
+        {{ccanne}}
+
+
+    
+    </body> 
+   
+   
+

@@ -1,0 +1,90 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
+    {% block css_test %}
+   
+    {% endblock %}
+    
+    <title>gesta Web</title>
+    
+</head>
+
+<body>
+   
+    <header>
+        <button onclick="sidebar()"><img src="{% static 'images/burger.png' %}"></button>
+        <div class="logo">
+            <h2>GESTA WEB</h3>
+        </div>
+        <div class="navbar">
+            <ul class="choises">
+                <li><a href="#">acceuil</a></li>
+                <li><a href="#">statistique</a></li>
+                <li><a href="#">apropos</a></li>
+            </ul>
+        </div>
+       
+        
+    </header>
+    <div class="sidebar">
+        <ul>
+            <li>test1</li>
+            <li>test2</li>
+            <li>test3</li>
+            <li>test4</li>
+            <li>test</li>
+        </ul>
+    </div>
+    <h1 style="color:red">fournisseurs :</h1>
+        <h4>total={{total_fournisseur}}</h4>
+        <h4>solde={{soldes_fournisseur}}</h4>
+        <h4>total des entree={{entrees_fournisseur}}</h4>
+        <h4>somme total des entree={{entrees_fournisseur_somme}}</h4>
+    <h1 style="color:red">produit</h1>
+        <h4>nombre de produit={{nombre_produit}}</h4>
+        <h4>stock initial={{stock_initial}}</h4>
+        <h4>stock total={{stock_total}}</h4>
+        <h4>stock negatif={{produit_stock_negatif}}</h4>
+        <h4>marge moyenne={{marge_moy}}</h4>
+        <h4>dont fidilisee={{dont_fidelisee}}</h4>
+        <h4>dont actif={{dont_actif}}</h4>
+        <h4>retour des fournisseur={{retour_fournisseur}}</h4>
+    <h1 style="color:red">client</h1>
+        <h4>total des client={{total_client}}</h4>
+        <h4>total des clients fideles={{total_client_fideles}}</h4>
+        <h4>total des soldes des clients={{solde_client}}</h4>
+        <h4>valeur de fidelite={{valeur_fidelite}}</h4>
+    <div class="container">
+        {% block content %} <!-- Utilisation des templates avec la balise block -->
+        <!-- Votre contenu principal ici -->
+        {% endblock %}
+    </div>
+   
+</body>
+<script>
+    function sidebar(){
+        var cont=document.getElementsByClassName("container")[0];
+        var sb=document.getElementsByClassName("sidebar")[0];
+        var sbstyle = window.getComputedStyle(sb);
+        var wd = window.innerWidth;
+        if(sbstyle.left<='0'){
+            sb.style.left='0px';
+            //cont.style.filter='blur(15px)';
+            
+            //cont.style.paddingLeft='220px';
+
+        }
+        else{
+            sb.style.left='-200px';
+            //cont.style.filter='none';
+            //cont.style.paddingLeft='20px';
+           
+        }
+    }
+</script>
+</html>

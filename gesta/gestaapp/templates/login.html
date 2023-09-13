@@ -1,0 +1,77 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+
+
+    <title>GESTA WEB</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="cont {% if messages %} shaking{% endif %}">
+            <div class="intro">
+                <img src="{% static 'images/gestalogo.png' %}" id="gestacase">
+                <div class="text">
+                    <h4>  Bienvenue dans le site Gesta Web qui sert à consulter la base de données du logiciel GestaCase.</h4>
+                    <h4>  Veuillez vous connecter en fournissant votre nom d'utilisateur et votre mot de passe pour accéder aux fonctionnalités du site.</h4>
+                   
+                </div>
+                 </div>
+            <div class="form">
+                <h1>GESTA WEB</h1>
+                <img src="{% static 'images/caisse100.png' %}" class="caisseicon">
+                <form method="post" id="login-form">
+                    {% csrf_token %}
+                    <div class="forminput">
+                        <div class="champ">
+                            <label for="">  USER :</label>
+                            <div class="logoup">
+                            <img src="{% static 'images/usricon.png' %}" class="usricon">
+                            <input type="text" name="username" class="inputtxt" placeholder="nom d'utilisateur">
+                        </div>
+                        </div>
+                        <div class="champ">
+                            <label for="">PASSWORD :</label>
+                            <div class="logoup">
+                            <img src="{% static 'images/pwdicon.png' %}" class="pwdicon">
+                            <input type="password" name="password" class="inputtxt" placeholder="mot de passe">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="champ">
+                        <input type="submit" value="Se connecter" id="submit">
+                    </div>
+               
+                
+                </form>
+            <div class="erreur">
+                {%if messages%}
+                    {%for message in messages%}
+
+                        <p>{{message}}</p>
+                   
+                    {%endfor%}
+                {%endif%}
+            </div>
+        </div>
+    </div>
+    </div>
+    
+</body>
+
+
+
+</html>
+
+<!-- Inclure la bibliothèque Google Translate -->

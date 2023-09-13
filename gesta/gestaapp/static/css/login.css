@@ -1,0 +1,248 @@
+
+
+   
+*{
+    font-family: Arial, sans-serif;
+}
+body {
+    
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+    
+    background: linear-gradient(to left,#1557ff 0% ,#487cfc 50%, aliceblue 50%, #487cfc 100%);
+      
+      
+   
+}
+
+input::placeholder{
+  
+  font-size: smaller;
+  font-weight: lighter;
+}
+.container{
+    
+    width: 100%;
+    height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+.cont{
+    
+    width:60%;
+    
+    
+    /*background-color: rgba(2, 47, 90, 0.699);
+   */
+    display: flex;
+    justify-content: center;
+   
+    padding: 2%;
+    
+    
+    
+    
+}
+
+
+.inputtxt{
+    display: block;
+    
+    color: #1557ff;
+    border: none;
+    background-color: aliceblue;
+    border-bottom: 1px solid #487cfc;
+   
+    width: 80%;
+    margin: auto;
+    margin-bottom: 5%;
+    font-size: 100%;
+    font-weight: 700;
+    
+    
+
+}
+.champ label{
+   
+    
+    font-size: 15px;
+    font-weight: bolder;
+    color: #487cfc;
+}
+
+.intro img{
+    border-radius: 100%;
+    max-width: 50%;
+
+}
+
+.intro{
+    width: 50%;
+    background: linear-gradient(to bottom, #487cfc, #2e6aff, #1557ff);
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    padding: 5%;
+    border-radius: 3% 0 0 3%;
+    
+}
+
+.form{
+    width: 50%;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-evenly;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+
+    padding: 5%;
+    border-radius:0 3% 3% 0;
+  }
+
+.text{
+    padding: 2%;
+    margin: 5% 0;
+    font-size: larger;
+    
+    
+}
+form{
+    
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    
+    
+
+}
+
+h1{
+    color: #487cfc;
+    font-size:xx-large;
+    margin-bottom: 5%;
+   
+}
+.erreur{
+   
+    color: rgb(238, 7, 7);
+    font-weight: bolder;
+    padding: 1%;
+    font-size: smaller;
+    text-align: center;
+    
+}
+
+.inputtxt:focus {
+    outline: none;
+    border-bottom:solid 2px #487cfc;
+    
+  }
+
+ 
+
+  #submit{
+    
+    font-size: 15px;
+    font-weight: 800;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: aliceblue;
+    border-radius: 20px;
+    color: #487cfc;
+    margin: 10% 0;
+    border: #487cfc 1px solid;
+    transition: transform 0.1s ease;
+}
+
+#submit:hover {
+    cursor: pointer;
+    color: aliceblue;
+    background-color: #487cfc;
+    
+    transform: scale(1.08);
+  }
+ 
+ 
+
+  .caisseicon{
+    margin-bottom: 15%;
+    width: 15%;
+  }
+  .logoup img{
+    width: 10%;
+    height: 10%;
+    
+    
+  }
+  .logoup{
+    display: flex;
+    align-items: start;
+    
+  }
+
+  
+  #gestacase{
+    margin:12% 0 10% 0;
+  }
+  
+  @media (max-width: 800px) {
+    .cont {
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      
+        
+    }
+    .intro{
+        display: none;
+    }
+    .form{
+        width: 70%;
+        border-radius: 5%;
+        padding: 5%;
+    }
+  }
+
+
+  
+/* Définir l'effet de tremblement */
+.shaking {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
